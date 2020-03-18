@@ -1,4 +1,4 @@
-package org.bszabat.algorithms;
+package org.bszabat.mgrbackend.algorithms;
 
 import org.springframework.stereotype.Component;
 
