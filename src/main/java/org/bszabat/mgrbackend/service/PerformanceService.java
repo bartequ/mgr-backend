@@ -1,6 +1,6 @@
-package org.bszabat.service;
+package org.bszabat.mgrbackend.service;
 
-import org.bszabat.algorithms.PrimeNumbers;
+import org.bszabat.mgrbackend.algorithms.PrimeNumbers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

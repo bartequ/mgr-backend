@@ -1,6 +1,6 @@
-package org.bszabat;
+package org.bszabat.mgrbackend;
 
-import org.bszabat.algorithms.PrimeNumbers;
+import org.bszabat.mgrbackend.algorithms.PrimeNumbers;
 
 import java.io.BufferedReader;
 import java.io.IOException;

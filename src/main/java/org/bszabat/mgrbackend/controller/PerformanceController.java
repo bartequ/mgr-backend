@@ -1,6 +1,6 @@
-package org.bszabat.controller;
+package org.bszabat.mgrbackend.controller;
 
-import org.bszabat.service.PerformanceService;
+import org.bszabat.mgrbackend.service.PerformanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +16,8 @@ public class PerformanceController {
         this.performanceService = performanceService;
     }
 
-    @GetMapping(path = "/prime-numbers")
+    //TODO /api to class
+    @GetMapping(path = "/api/prime-numbers")
     public String checkPrimeNumbers(@RequestParam int number) {
         return performanceService.checkIfNumbersPrimeInRange(number);
     }
