@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  backend-spring:
+    container_name: backend_spring
+    restart: always
+    build:
+      context: mgr-backend-spring
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+  backend-node:
+    container_name: backend_node
+    restart: always
+    build:
+      context: mgr-backend-node
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"

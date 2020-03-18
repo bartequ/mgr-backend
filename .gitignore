@@ -1,0 +1,6 @@
+*.iml
+.idea
+mgr-backend-node/.idea
+mgr-backend-node/node_modules
+mgr-backend-spring/.idea
+mgr-backend-spring/target

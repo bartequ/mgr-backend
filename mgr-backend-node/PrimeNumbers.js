@@ -5,7 +5,7 @@ function measureTime(number, functionToMeasure) {
     return `Execution time: ${t1[0]}s ${t1[1] / 1000000}ms`
 }
 
-function checkIfNumberPrimeInRange(number) {
+function checkIfNumbersPrimeInRange(number) {
     let outputStr = '';
 
     for (let i = 2; i <= number; i++) {
@@ -25,4 +25,4 @@ function checkIfNumberPrimeInRange(number) {
     return outputStr;
 }
 
-module.exports = {measureTime, checkIfNumberPrimeInRange};
+module.exports = {measureTime, checkIfNumbersPrimeInRange};
