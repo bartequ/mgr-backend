@@ -9,6 +9,17 @@ services:
     ports:
       - "8080:8080"
 
+  postgres-spring:
+    container_name: postgres-spring
+    image: library/postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres_spring
+      - POSTGRES_PASSWORD=postgres_spring
+      - POSTGRES_DB=performance_spring
+
   backend-node:
     container_name: backend_node
     restart: always
@@ -17,3 +28,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+
+  postgres-node:
+    container_name: postgres-node
+    image: library/postgres
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres_node
+      - POSTGRES_PASSWORD=postgres_node
+      - POSTGRES_DB=performance_node
