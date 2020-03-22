@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PerformanceService {
+public class TimeConsumingOperationService {
 
     private PrimeNumbers primeNumbers;
 
     @Autowired
-    public PerformanceService(PrimeNumbers primeNumbers) {
+    public TimeConsumingOperationService(PrimeNumbers primeNumbers) {
         this.primeNumbers = primeNumbers;
     }
 
