@@ -30,7 +30,7 @@ public class DatabaseOperationService {
     public DatabaseOperationDto updateDbOperation(Long operationId, DatabaseOperationDto databaseOperationDtoRequest) {
         return databaseOperationRepository.findById(operationId)
                 .map(databaseOperationDto -> {
-                    databaseOperationDto.setTitle(databaseOperationDtoRequest.getTitle());
+                    databaseOperationDto.setNumber(databaseOperationDtoRequest.getNumber());
                     databaseOperationDto.setDescription(databaseOperationDtoRequest.getDescription());
                     return databaseOperationRepository.save(databaseOperationDto);
                 }).orElseThrow(() -> new ResourceNotFoundException("Question not found with id " + operationId));

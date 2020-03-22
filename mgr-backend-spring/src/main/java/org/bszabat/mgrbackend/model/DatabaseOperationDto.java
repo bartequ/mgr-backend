@@ -2,6 +2,7 @@ package org.bszabat.mgrbackend.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "db_operations")
@@ -11,10 +12,10 @@ public class DatabaseOperationDto extends AuditModel {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Column(columnDefinition = "text")
-    private String title;
+    @NotNull
+    private Integer number;
 
+    @NotBlank
     @Column(columnDefinition = "text")
     private String description;
 
@@ -26,12 +27,12 @@ public class DatabaseOperationDto extends AuditModel {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public String getDescription() {
