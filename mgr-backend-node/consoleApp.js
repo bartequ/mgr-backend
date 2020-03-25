@@ -1,4 +1,4 @@
-const primeNumbers = require('./PrimeNumbers');
+const primeNumbers = require('./algorithms/primeNumbers');
 
 const readline = require('readline').createInterface({
     input: process.stdin,
