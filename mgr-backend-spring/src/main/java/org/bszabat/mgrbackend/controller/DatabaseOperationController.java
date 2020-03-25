@@ -3,12 +3,11 @@ package org.bszabat.mgrbackend.controller;
 import org.bszabat.mgrbackend.model.DatabaseOperationDto;
 import org.bszabat.mgrbackend.service.DatabaseOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -21,9 +20,19 @@ public class DatabaseOperationController {
         this.databaseOperationService = databaseOperationService;
     }
 
+    @GetMapping("/database-operations/operation-lasts/{seconds}")
+    public String getDbTimeConsumingOperation(@PathVariable Integer seconds) {
+        return databaseOperationService.getDbTimeConsumingOperation(seconds);
+    }
+
     @GetMapping("/database-operations")
-    public Page<DatabaseOperationDto> getDbOperations(Pageable pageable) {
-        return databaseOperationService.getDbOperations(pageable);
+    public List<DatabaseOperationDto> getAllDbOperations() {
+        return databaseOperationService.getAllDbOperations();
+    }
+
+    @GetMapping("/database-operations/{operationId}")
+    public DatabaseOperationDto getDbOperation(@PathVariable Long operationId) {
+        return databaseOperationService.getDbOperation(operationId);
     }
 
     @PostMapping("/database-operations")

@@ -1,20 +1,21 @@
 package org.bszabat.mgrbackend.service;
 
 import org.bszabat.mgrbackend.algorithms.PrimeNumbers;
+import org.bszabat.mgrbackend.algorithms.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TimeConsumingOperationService {
 
-    private PrimeNumbers primeNumbers;
+    private Utils utils;
 
     @Autowired
-    public TimeConsumingOperationService(PrimeNumbers primeNumbers) {
-        this.primeNumbers = primeNumbers;
+    public TimeConsumingOperationService(Utils utils) {
+        this.utils = utils;
     }
 
     public String checkIfNumbersPrimeInRange(int number) {
-        return primeNumbers.measureTime(number, PrimeNumbers::checkIfNumbersPrimeInRange);
+        return utils.measureTime(number, PrimeNumbers::checkIfNumbersPrimeInRange);
     }
 }
