@@ -1,4 +1,5 @@
 const primeNumbers = require('../algorithms/primeNumbers');
+const utils = require('../algorithms/utils');
 const DatabaseOperation = require('../model/databaseOperation');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -8,8 +9,10 @@ const port = 3001;
 app.use(bodyParser.json());
 
 app.get('/api/prime-numbers/:number', (req, res) => {
-    res.send(primeNumbers.measureTime(req.params.number, primeNumbers.checkIfNumbersPrimeInRange));
+    res.send(utils.measureTime(req.params.number, primeNumbers.checkIfNumbersPrimeInRange));
 });
+
+app.get('/api/database-operations/operation-lasts/:seconds', DatabaseOperation.getTimeConsumingOperation);
 
 app.get('/api/database-operations', DatabaseOperation.readAllOperations);
 
