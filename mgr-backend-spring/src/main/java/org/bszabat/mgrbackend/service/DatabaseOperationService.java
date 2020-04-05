@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DatabaseOperationService {
@@ -27,6 +28,10 @@ public class DatabaseOperationService {
 
     public List<DatabaseOperationDto> getAllDbOperations() {
         return databaseOperationRepository.findAll();
+    }
+
+    public List<Map<String, Object>> getAllDbOperationsWithoutOrm() {
+        return jdbcTemplate.queryForList("SELECT * FROM db_operations");
     }
 
     public DatabaseOperationDto getDbOperation(Long operationId) {

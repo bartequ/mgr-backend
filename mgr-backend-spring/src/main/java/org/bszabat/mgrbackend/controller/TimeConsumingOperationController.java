@@ -18,7 +18,7 @@ public class TimeConsumingOperationController {
         this.timeConsumingOperationService = timeConsumingOperationService;
     }
 
-    @GetMapping(path = "/prime-numbers")
+    @GetMapping("/prime-numbers")
     public String checkPrimeNumbers(@RequestParam int number) {
         return timeConsumingOperationService.checkIfNumbersPrimeInRange(number);
     }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -18,6 +19,11 @@ public class DatabaseOperationController {
     @Autowired
     public DatabaseOperationController(DatabaseOperationService databaseOperationService) {
         this.databaseOperationService = databaseOperationService;
+    }
+
+    @GetMapping("/database-operations/without-orm")
+    public List<Map<String, Object>> getAllDbOperationsWithoutOrm() {
+        return databaseOperationService.getAllDbOperationsWithoutOrm();
     }
 
     @GetMapping("/database-operations/operation-lasts/{seconds}")
