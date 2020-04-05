@@ -1,4 +1,5 @@
-const primeNumbers = require('./algorithms/primeNumbers');
+const primeNumbers = require('../algorithms/primeNumbers');
+const utils = require('../algorithms/utils');
 
 const readline = require('readline').createInterface({
     input: process.stdin,
@@ -6,6 +7,6 @@ const readline = require('readline').createInterface({
 });
 
 readline.question(`Numbers to check: `, (num) => {
-    console.log(primeNumbers.measureTime(20, primeNumbers.checkIfNumberPrimeInRange));
+    console.log(utils.measureTime(20, primeNumbers.checkIfNumbersPrimeInRange));
     readline.close();
 });
