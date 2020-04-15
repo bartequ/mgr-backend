@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 public class PrimeNumbers {
 
     public static String checkIfNumbersPrimeInRange(int number) {
+        if (number < 2) {
+            return "No prime numbers in given range";
+        }
+
         String outputStr = "";
         for (int i = 2; i <= number; i++) {
             boolean isPrime = true;
@@ -20,6 +24,6 @@ public class PrimeNumbers {
                 outputStr += i + " ";
             }
         }
-        return outputStr;
+        return outputStr.substring(0, outputStr.length()-1);
     }
 }
