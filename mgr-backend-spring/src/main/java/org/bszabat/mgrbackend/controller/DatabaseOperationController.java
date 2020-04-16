@@ -21,6 +21,7 @@ public class DatabaseOperationController {
         this.databaseOperationService = databaseOperationService;
     }
 
+    //TODO Add time measure
     @GetMapping("/database-operations/without-orm")
     public List<Map<String, Object>> getAllDbOperationsWithoutOrm() {
         return databaseOperationService.getAllDbOperationsWithoutOrm();

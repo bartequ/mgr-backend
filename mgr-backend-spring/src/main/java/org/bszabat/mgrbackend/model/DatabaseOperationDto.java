@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+//TODO this is rather entity not dto
 @Entity
 @Table(name = "db_operations")
 public class DatabaseOperationDto extends AuditModel {
