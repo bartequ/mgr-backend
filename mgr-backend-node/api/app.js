@@ -1,3 +1,4 @@
+require('appmetrics-dash').monitor();
 const primeNumbers = require('../algorithms/primeNumbers');
 const utils = require('../algorithms/utils');
 const DatabaseOperation = require('../model/databaseOperation');
