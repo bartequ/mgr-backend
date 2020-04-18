@@ -1,0 +1,10 @@
+{
+  "httpRequest" : {
+    "method" : "GET",
+    "path" : "/api/photos/5000"
+  },
+  "httpResponse" : {
+    "body" : "{\"wheather\": 20.5}",
+    "statusCode": 200
+  }
+}

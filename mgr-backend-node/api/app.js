@@ -17,7 +17,6 @@ const poolPostgres = new Pool({
     port: "5433"
 });
 
-
 app.use(bodyParser.json());
 
 app.get('/api/prime-numbers/:number', (req, res) => {
