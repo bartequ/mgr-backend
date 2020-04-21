@@ -18,4 +18,9 @@ function checkIfNumbersPrimeInRange(number) {
     return outputStr;
 }
 
+let t0 = process.hrtime();
+checkIfNumbersPrimeInRange(300000);
+let t1 = process.hrtime(t0);
+console.log(`Execution time: ${t1[0]}s ${t1[1] / 1000000}ms`);
+
 module.exports = {checkIfNumbersPrimeInRange};

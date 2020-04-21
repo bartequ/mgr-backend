@@ -26,4 +26,12 @@ public class PrimeNumbers {
         }
         return outputStr.substring(0, outputStr.length()-1);
     }
+
+    public static void main(String[] args) {
+        long startTime = System.nanoTime();
+        PrimeNumbers.checkIfNumbersPrimeInRange(300000);
+        long endTime = System.nanoTime();
+        long elapsedTimeMs = (endTime - startTime) / 1000000;
+        System.out.println(String.format("Execution time: %ss %sms", elapsedTimeMs/1000, elapsedTimeMs%1000));
+    }
 }
