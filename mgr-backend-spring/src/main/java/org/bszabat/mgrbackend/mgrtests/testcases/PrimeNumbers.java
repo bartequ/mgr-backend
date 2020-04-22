@@ -1,4 +1,4 @@
-package org.bszabat.mgrbackend.mgrtests;
+package org.bszabat.mgrbackend.mgrtests.testcases;
 
 import org.bszabat.mgrbackend.algorithms.Utils;
 

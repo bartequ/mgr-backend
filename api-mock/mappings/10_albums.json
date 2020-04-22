@@ -1,0 +1,16 @@
+{
+  "httpRequest" : {
+    "method" : "GET",
+    "path" : "/api/albums/10"
+  },
+  "httpResponse" : {
+    "statusCode": 200,
+    "headers" : [
+      {
+        "name": "Content-Type",
+        "values": ["application/json; charset=utf-8"]
+      }
+    ],
+    "body" : "[{\"albumId\": 1,\"description\": \"description 1\"},{\"albumId\": 2,\"description\": \"description 2\"},{\"albumId\": 3,\"description\": \"description 3\"},{\"albumId\": 4,\"description\": \"description 4\"},{\"albumId\": 5,\"description\": \"description 5\"},{\"albumId\": 6,\"description\": \"description 6\"},{\"albumId\": 7,\"description\": \"description 7\"},{\"albumId\": 8,\"description\": \"description 8\"},{\"albumId\": 9,\"description\": \"description 9\"},{\"albumId\": 10,\"description\": \"description 10\"}]"
+  }
+}

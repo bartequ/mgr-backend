@@ -9,7 +9,8 @@
 - npm
 
 ### Setup mock server
-See api-mock folder
+See api-mock folder<br>
+`URL: http://localhost:1080/api`
 
 ### Spring endpoints used for tests
 #### Time consuming operations

@@ -1,5 +1,6 @@
-package org.bszabat.mgrbackend.mgrtests;
+package org.bszabat.mgrbackend.mgrtests.testcases;
 
+import org.bszabat.mgrbackend.mgrtests.URLHelper;
 import org.springframework.web.client.RestTemplate;
 
 public class IOBlocking {

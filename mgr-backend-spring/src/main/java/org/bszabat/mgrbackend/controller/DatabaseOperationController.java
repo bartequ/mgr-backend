@@ -1,6 +1,6 @@
 package org.bszabat.mgrbackend.controller;
 
-import org.bszabat.mgrbackend.model.DatabaseOperationDto;
+import org.bszabat.mgrbackend.model.DatabaseOperation;
 import org.bszabat.mgrbackend.service.DatabaseOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +14,7 @@ import java.util.Map;
 @RequestMapping("/api")
 public class DatabaseOperationController {
 
+    //TODO Check statuses when deleting and updating
     private DatabaseOperationService databaseOperationService;
 
     @Autowired
@@ -21,7 +22,7 @@ public class DatabaseOperationController {
         this.databaseOperationService = databaseOperationService;
     }
 
-    //TODO Add time measure
+    //TODO Add time measure - test comparison time db operations Postgres/Mongo
     @GetMapping("/database-operations/without-orm")
     public List<Map<String, Object>> getAllDbOperationsWithoutOrm() {
         return databaseOperationService.getAllDbOperationsWithoutOrm();
@@ -33,24 +34,25 @@ public class DatabaseOperationController {
     }
 
     @GetMapping("/database-operations")
-    public List<DatabaseOperationDto> getAllDbOperations() {
+    public List<DatabaseOperation> getAllDbOperations() {
         return databaseOperationService.getAllDbOperations();
     }
 
     @GetMapping("/database-operations/{operationId}")
-    public DatabaseOperationDto getDbOperation(@PathVariable Long operationId) {
+    public DatabaseOperation getDbOperation(@PathVariable Long operationId) {
         return databaseOperationService.getDbOperation(operationId);
     }
 
+    //TODO Should return status 201
     @PostMapping("/database-operations")
-    public DatabaseOperationDto createDbOperation(@Valid @RequestBody DatabaseOperationDto databaseOperationDto) {
-        return databaseOperationService.createDbOperation(databaseOperationDto);
+    public DatabaseOperation createDbOperation(@Valid @RequestBody DatabaseOperation databaseOperation) {
+        return databaseOperationService.createDbOperation(databaseOperation);
     }
 
     @PutMapping("/database-operations/{operationId}")
-    public DatabaseOperationDto updateDbOperation(@PathVariable Long operationId,
-                                                  @Valid @RequestBody DatabaseOperationDto databaseOperationDtoRequest) {
-        return databaseOperationService.updateDbOperation(operationId, databaseOperationDtoRequest);
+    public DatabaseOperation updateDbOperation(@PathVariable Long operationId,
+                                               @Valid @RequestBody DatabaseOperation databaseOperationRequest) {
+        return databaseOperationService.updateDbOperation(operationId, databaseOperationRequest);
     }
 
     @DeleteMapping("/database-operations/{operationId}")

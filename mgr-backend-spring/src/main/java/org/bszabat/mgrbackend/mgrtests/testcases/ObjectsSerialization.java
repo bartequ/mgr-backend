@@ -1,6 +1,7 @@
-package org.bszabat.mgrbackend.mgrtests;
+package org.bszabat.mgrbackend.mgrtests.testcases;
 
 import org.bszabat.mgrbackend.exception.CannotFetchData;
+import org.bszabat.mgrbackend.mgrtests.URLHelper;
 import org.bszabat.mgrbackend.model.PhotoDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
