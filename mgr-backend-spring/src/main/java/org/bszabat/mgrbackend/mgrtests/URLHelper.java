@@ -8,5 +8,5 @@ public final class URLHelper {
     public final static String PHOTOS_TEST_10000 = MOCK_URL + "/photos/10000";
     public final static String PHOTOS_TEST_40000 = MOCK_URL + "/photos/40000";
 
-    public final static String DB_OPERATION_WAIT_FOR = "http://localhost:3000/api/database-operations/operation-lasts";
+    public final static String DB_OPERATION_WAIT_FOR = "http://localhost:8080/api/database-operations/operation-lasts";
 }

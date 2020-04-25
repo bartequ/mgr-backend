@@ -14,7 +14,7 @@ public class ObjectsSerialization {
         ResponseEntity<PhotoDto[]> response = restTemplate.getForEntity(url, PhotoDto[].class);
         long endTime = System.nanoTime();
         long elapsedTimeMs = (endTime - startTime) / 1000000;
-        System.out.println(String.format("Execution time: %ss %sms", elapsedTimeMs/1000, elapsedTimeMs%1000));
+        System.out.println(String.format("Execution time serialization to Objects: %ss %sms", elapsedTimeMs/1000, elapsedTimeMs%1000));
         if (response.getStatusCode().value() != 200) {
             throw new CannotFetchData("Cannot fetch data from " + url);
         }
@@ -26,7 +26,7 @@ public class ObjectsSerialization {
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
         long endTime = System.nanoTime();
         long elapsedTimeMs = (endTime - startTime) / 1000000;
-        System.out.println(String.format("Execution time: %ss %sms", elapsedTimeMs/1000, elapsedTimeMs%1000));
+        System.out.println(String.format("Execution time serialization to String: %ss %sms", elapsedTimeMs/1000, elapsedTimeMs%1000));
         if (response.getStatusCode().value() != 200) {
             throw new CannotFetchData("Cannot fetch data from " + url);
         }
@@ -34,6 +34,7 @@ public class ObjectsSerialization {
 
     public static void main(String[] args) {
         ObjectsSerialization objectsSerialization = new ObjectsSerialization();
-        objectsSerialization.fetchTestPhotosToString(URLHelper.PHOTOS_TEST_5000);
+        objectsSerialization.fetchTestPhotosToString(URLHelper.PHOTOS_TEST_40000);
+        objectsSerialization.fetchTestPhotosToPhotoDto(URLHelper.PHOTOS_TEST_40000);
     }
 }

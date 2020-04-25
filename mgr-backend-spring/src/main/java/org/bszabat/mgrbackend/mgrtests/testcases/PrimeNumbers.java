@@ -9,7 +9,7 @@ import java.util.OptionalDouble;
 public class PrimeNumbers {
     public static void main(String[] args) {
         PrimeNumbers primeNumbers = new PrimeNumbers();
-        List<Double> resultsList = primeNumbers.checkIfNumbersPrimeInRangeTimes(20, 50000);
+        List<Double> resultsList = primeNumbers.checkIfNumbersPrimeInRangeTimes(20, 400000);
         System.out.println(resultsList);
         System.out.println(primeNumbers.countAverage(resultsList).getAsDouble());
     }

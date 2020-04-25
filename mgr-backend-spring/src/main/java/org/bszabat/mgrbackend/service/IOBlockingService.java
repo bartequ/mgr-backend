@@ -19,7 +19,7 @@ public class IOBlockingService {
     private RestTemplate restTemplate = new RestTemplate();
 
     public List<Photo> getAllPhotos() {
-        ResponseEntity<PhotoDto[]> responsePhotos = restTemplate.getForEntity(URLHelper.PHOTOS_TEST_5000, PhotoDto[].class);
+        ResponseEntity<PhotoDto[]> responsePhotos = restTemplate.getForEntity(URLHelper.PHOTOS_TEST_40000, PhotoDto[].class);
         if (responsePhotos.getStatusCode().value() != 200) {
             throw new CannotFetchData("Cannot fetch data from: " + URLHelper.PHOTOS_TEST_40000);
         }

@@ -1,6 +1,7 @@
 require('appmetrics-dash').monitor();
 const primeNumbers = require('../algorithms/primeNumbers');
 const utils = require('../algorithms/utils');
+const ioblockingService = require('../model/ioblockingService');
 const DatabaseOperation = require('../model/databaseOperation');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -18,6 +19,8 @@ const poolPostgres = new Pool({
 });
 
 app.use(bodyParser.json());
+
+app.get('/api/ioblocking/photos', ioblockingService.getAllPhotos);
 
 app.get('/api/prime-numbers/:number', (req, res) => {
     res.send(utils.measureTime(req.params.number, primeNumbers.checkIfNumbersPrimeInRange));

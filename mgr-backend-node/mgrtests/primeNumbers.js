@@ -25,6 +25,6 @@ function countAverage(results) {
     return results.reduce((prev, curr) => prev + curr) / results.length;
 }
 
-results = checkIfNumbersPrimeInRangeTimes(20, 50000);
+results = checkIfNumbersPrimeInRangeTimes(20, 400000);
 console.log(results);
 console.log(countAverage(results));

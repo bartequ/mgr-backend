@@ -6,4 +6,5 @@
   - `/actuator/metrics/jvm.memory.used?tag=area:heap`
   - `/actuator/metrics/jvm.memory.used?tag=area:nonheap`
   
-- Endpoint with I/O Blocking operations (2 API calls and db call)
+- Endpoint with I/O Blocking operations (2 API calls)
+  - `http://localhost:8080/api/ioblocking/photos`
