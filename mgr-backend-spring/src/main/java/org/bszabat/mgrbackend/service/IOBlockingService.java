@@ -21,7 +21,7 @@ public class IOBlockingService {
     public List<Photo> getAllPhotos() {
         ResponseEntity<PhotoDto[]> responsePhotos = restTemplate.getForEntity(URLHelper.PHOTOS_TEST_40000, PhotoDto[].class);
         if (responsePhotos.getStatusCode().value() != 200) {
-            throw new CannotFetchData("Cannot fetch data from: " + URLHelper.PHOTOS_TEST_40000);
+            throw new CannotFetchData("Cannot fetch data from: " + URLHelper.PHOTOS_TEST_10000);
         }
 
         ResponseEntity<AlbumDto[]> responseAlbums = restTemplate.getForEntity(URLHelper.ALBUM_TEST_10, AlbumDto[].class);

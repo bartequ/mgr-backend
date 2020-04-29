@@ -33,3 +33,6 @@ See api-mock folder<br>
 - `POST /api/database-operations`
 - `PUT /api/database-operations/id`
 - `DELETE /api/database-operations/id`
+
+## Tests results 
+`https://docs.google.com/spreadsheets/d/1Wdz5dGLTWOCbA7_xuFlbqrJBm833UJMwAyYaup49ITQ/edit?usp=sharing`

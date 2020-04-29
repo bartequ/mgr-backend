@@ -1,63 +1,20 @@
 package org.bszabat.mgrbackend.service;
 
 import org.bszabat.mgrbackend.algorithms.Utils;
-import org.bszabat.mgrbackend.exception.ResourceNotFoundException;
-import org.bszabat.mgrbackend.model.DatabaseOperation;
-import org.bszabat.mgrbackend.repository.DatabaseOperationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class DatabaseOperationService {
 
     private static JdbcTemplate jdbcTemplate;
-    private DatabaseOperationRepository databaseOperationRepository;
     private Utils utils;
 
     @Autowired
-    public DatabaseOperationService(DatabaseOperationRepository databaseOperationRepository, JdbcTemplate jdbcTemplate, Utils utils) {
+    public DatabaseOperationService(JdbcTemplate jdbcTemplate, Utils utils) {
         DatabaseOperationService.jdbcTemplate = jdbcTemplate;
-        this.databaseOperationRepository = databaseOperationRepository;
         this.utils = utils;
-    }
-
-    public List<DatabaseOperation> getAllDbOperations() {
-        return databaseOperationRepository.findAll();
-    }
-
-    public List<Map<String, Object>> getAllDbOperationsWithoutOrm() {
-        return jdbcTemplate.queryForList("SELECT * FROM db_operations");
-    }
-
-    public DatabaseOperation getDbOperation(Long operationId) {
-        return databaseOperationRepository.findById(operationId).
-                orElseThrow(() -> new ResourceNotFoundException("Resource not found with id" + operationId));
-    }
-
-    public DatabaseOperation createDbOperation(DatabaseOperation databaseOperation) {
-        return databaseOperationRepository.save(databaseOperation);
-    }
-
-    public DatabaseOperation updateDbOperation(Long operationId, DatabaseOperation databaseOperationRequest) {
-        return databaseOperationRepository.findById(operationId)
-                .map(databaseOperation -> {
-                    databaseOperation.setNumber(databaseOperationRequest.getNumber());
-                    databaseOperation.setDescription(databaseOperationRequest.getDescription());
-                    return databaseOperationRepository.save(databaseOperation);
-                }).orElseThrow(() -> new ResourceNotFoundException("Resource not found with id" + operationId));
-    }
-
-    public ResponseEntity<?> deleteDbOperation(Long operationId) {
-        return databaseOperationRepository.findById(operationId)
-                .map(databaseOperation -> {
-                    databaseOperationRepository.delete(databaseOperation);
-                    return ResponseEntity.ok().build();
-                }).orElseThrow(() -> new ResourceNotFoundException("Resource not found with id" + operationId));
     }
 
     public String getDbTimeConsumingOperation(int seconds) {
