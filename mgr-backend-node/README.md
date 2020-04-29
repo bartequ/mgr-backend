@@ -22,7 +22,7 @@
 
 ###Tests
 ##### 1. PrimeNumbers
-The purpose of this test is to show JVM computing performance. Given range is checked if within range are prime numbers.<br>
+The purpose of this test is to show Node computing performance. Given range is checked if within range are prime numbers.<br>
 `http://localhost:3000/api/prime-numbers/[RANGE_TO_CHECK]`<br>
 Output - time needed to check given range
 
