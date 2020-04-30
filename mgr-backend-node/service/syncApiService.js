@@ -1,10 +1,16 @@
 const axios = require('axios');
+const url = 'http://localhost:1080/api/photos/';
 
-async function getAllPhotos(req, res) {
+async function getAllPhotosTime(req, res) {
     try {
-        const albums = await axios.get('http://localhost:1080/api/albums/10');
+        let quantity = req.params.quantity;
+        if (!'5000,10000,40000,120000'.includes(quantity)) {
+            res.status(400).send();
+        }
 
-        const photos = await axios.get('http://localhost:1080/api/photos/10000').then(res => {
+        let t0 = process.hrtime();
+        const albums = await axios.get('http://localhost:1080/api/albums/10');
+        await axios.get(url + quantity).then(res => {
 
             return res.data.map(p => ({
                 id: p.id,
@@ -19,7 +25,8 @@ async function getAllPhotos(req, res) {
                 })
             }))
         });
-        res.send(photos);
+        let t1 = process.hrtime(t0);
+        res.send(`Execution time serialization to objects: ${t1[0]}s ${t1[1] / 1000000}ms`);
     } catch (e) {
         res.status(500).send(e);
     }
@@ -36,4 +43,4 @@ function getAlbumIdAndReduceWithinRange(param, range) {
     return parseInt(paramStr.substr(paramStr.length - 2, paramStr.length - 1),10);
 }
 
-module.exports = {getAllPhotos};
+module.exports = {getAllPhotos: getAllPhotosTime};

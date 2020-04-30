@@ -22,7 +22,7 @@
 ##### Push image
 `docker push bszabat/mgr-spring:[tag]`
 
-###Tests
+### Tests
 ##### 1. PrimeNumbers
 The purpose of this test is to show JVM computing performance. Given range is checked if within range are prime numbers.<br>
 `http://localhost:8080/api/prime-numbers?number=[RANGE_TO_CHECK]`<br>
