@@ -1,22 +1,32 @@
 package org.bszabat.mgrbackend.service;
 
+import org.bszabat.mgrbackend.helpers.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
 public class IOBlockingService {
 
-    public String callsToDbLastsEndpoint(String url) {
-        long startTime = System.nanoTime();
+    private Utils utils;
+
+    @Autowired
+    public IOBlockingService(Utils utils) {
+        this.utils = utils;
+    }
+
+    public String callsToDbLastsEndpointTime(String url) {
+        return utils.measureTime(url, this::callsToDbLastsEndpoint);
+    }
+
+    private String callsToDbLastsEndpoint(String url) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getForEntity(url + "/5", String.class);
-        System.out.println("Request 5s");
+        System.out.println("Request 5s completed");
 
         restTemplate.getForEntity(url + "/4", String.class);
-        System.out.println("Request 4s");
+        System.out.println("Request 4s completed");
 
-        long endTime = System.nanoTime();
-        long elapsedTimeMs = (endTime - startTime) / 1000000;
-        return String.format("Execution time: %ss %sms", elapsedTimeMs/1000, elapsedTimeMs%1000);
+        return "API calls successful";
     }
 }

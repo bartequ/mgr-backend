@@ -37,15 +37,15 @@ The purpose of this test is to show time needed to serialize array of objects
 ##### 4. I/O Blocking async calls
 The purpose of this test is to show time needed to perform 2 API calls simulated by local endpoints, one take 4 
 seconds and second 5 seconds. Service should perform those calls as soon as possible.
-<br>Add endpoint description and Spring async calls
+<br>Spring `http://localhost:8080/api/ioblocking`
+<br>Node `http://localhost:3000/api/ioblocking`
 <br>Output - time needed to perform calls
 
 ##### 5. Synchronous API calls and objects processing
 The purpose of this test is to show time needed in scenario where 2 API calls have to be combined and results returned in response.
 <br>API call -> API call -> merge data into objects -> Response
-<br>Spring `http://localhost:3000/api/sync-api/photos`
-<br>Node `http://localhost:3000/api/sync-api/photos`
-<br>TODO add parameter to choose objects quantity
+<br>Spring `http://localhost:8080/api/sync-api/photos/[5000/10000/40000/120000]`
+<br>Node `http://localhost:3000/api/sync-api/photos/[5000/10000/40000/120000]`
 <br>Output - time needed to perform API calls and objects manipulations.
 
 ## Tests results 

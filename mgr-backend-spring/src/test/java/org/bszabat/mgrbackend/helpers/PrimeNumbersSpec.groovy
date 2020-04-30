@@ -1,4 +1,4 @@
-package org.bszabat.mgrbackend.algorithms
+package org.bszabat.mgrbackend.helpers
 
 import spock.lang.Specification
 

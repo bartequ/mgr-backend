@@ -1,13 +1,7 @@
 package org.bszabat.mgrbackend.model;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "photos")
 public class Photo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer albumId;
     private String title;
@@ -16,7 +10,6 @@ public class Photo {
     private String description;
 
     public Photo() {
-
     }
 
     public Photo(Integer id, Integer albumId, String title, String url, String thumbnailUrl, String description) {
