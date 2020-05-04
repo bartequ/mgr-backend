@@ -4,3 +4,7 @@ mgr-backend-node/.idea
 mgr-backend-node/node_modules
 mgr-backend-spring/.idea
 mgr-backend-spring/target
+mgr-backend-postgres/.idea
+mgr-backend-postgres/target
+mgr-backend-mysql/.idea
+mgr-backend-mysql/target
