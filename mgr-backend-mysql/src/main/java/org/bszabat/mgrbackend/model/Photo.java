@@ -17,7 +17,7 @@ public class Photo {
     public Photo() {
     }
 
-    public Photo(Long id, Integer albumId, String title, String url, String thumbnailUrl, String description) {
+    public Photo(Long id, Integer albumId, String title, String url, String thumbnailUrl) {
         this.id = id;
         this.albumId = albumId;
         this.title = title;

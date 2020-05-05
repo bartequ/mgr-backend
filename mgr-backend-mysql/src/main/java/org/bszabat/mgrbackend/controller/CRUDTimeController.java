@@ -23,4 +23,19 @@ public class CRUDTimeController {
     public String saveTablePhotosToDb(@PathVariable Integer quantity) {
         return crudTimeService.createMultipleByOneTime(URLHelper.PHOTOS, quantity);
     }
+
+    @GetMapping("/read/{quantity}")
+    public String readMultiplePhotos(@PathVariable Long quantity) {
+        return crudTimeService.readMultipleTime(quantity);
+    }
+
+    @GetMapping("/update/{quantity}")
+    public String updateMultiplePhotos(@PathVariable Long quantity) {
+        return crudTimeService.updateMultipleTime(quantity);
+    }
+
+    @GetMapping("/delete/{quantity}")
+    public String deleteMultiplePhotos(@PathVariable Long quantity) {
+        return crudTimeService.deleteMultipleTime(quantity);
+    }
 }
