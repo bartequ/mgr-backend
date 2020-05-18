@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Photo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer albumId;
     private String title;
@@ -15,6 +15,13 @@ public class Photo {
     private String thumbnailUrl;
 
     public Photo() {
+    }
+
+    public Photo(Integer albumId, String title, String url, String thumbnailUrl) {
+        this.albumId = albumId;
+        this.title = title;
+        this.url = url;
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public Photo(Long id, Integer albumId, String title, String url, String thumbnailUrl) {

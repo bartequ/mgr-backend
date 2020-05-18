@@ -1,9 +1,9 @@
 ## Spring performance application
 
 ### Environment
-### To run Postgres instance for test purposes
+##### To run Postgres instance for test purposes
 `docker run -d -p 5432:5432 --env POSTGRES_USER=postgres_spring --env POSTGRES_PASSWORD=postgres_spring --env POSTGRES_DB=performance_spring library/postgres`
-### To run mock server
+##### To run mock server
 `sh api-mock/run.sh`
 - `http://localhost:1080/api/photos/[5000/10000/40000/120000]`
 - `http://localhost:1080/api/albums/10`

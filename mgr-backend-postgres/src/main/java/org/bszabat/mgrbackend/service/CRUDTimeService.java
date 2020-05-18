@@ -21,7 +21,7 @@ public class CRUDTimeService {
     private PhotoRepository photoRepository;
     private Utils utils;
 
-    private Photo photoReq = new Photo(1L, 1, "title", "url", "thumbnailUrl");
+    private Photo photoReqMock = new Photo(1, "title", "url", "thumbnailUrl");
 
     @Autowired
     public CRUDTimeService(PhotoRepository photoRepository, Utils utils) {
@@ -29,9 +29,11 @@ public class CRUDTimeService {
         this.utils = utils;
     }
 
-    public String readMultipleTime(String method, int quantity, long id) {
+
+    //TODO zabezpieczyc przed czytaniem wiecej obiektow niz jest w bazie?
+    public String readMultipleTime(String method, int quantity) {
         if (method.equals("single")) {
-            return utils.measureTime(quantity + "/" + id, this::readMultiple);
+            return utils.measureTime(quantity, this::readMultipleSingle);
         }
         else if (method.equals("all") && PHOTOS_RANGE.contains(String.valueOf(quantity))) {
             return utils.measureTime(quantity, this::readMultipleAll);
@@ -41,37 +43,52 @@ public class CRUDTimeService {
 
     private String readMultipleAll(int quantity) {
         photoRepository.findAll();
-        return "Read all successful";
+        return "Read all successful, quantity: " + quantity;
     }
 
-    private String readMultiple(String params) {
-        int quantity = Integer.parseInt(params.split("/")[0]);
-        long id = Long.parseLong(params.split("/")[1]);
+    private String readMultipleSingle(int quantity) {
+        long id = photoRepository.findMinId().get();
         for (int i=0; i<quantity; i++) {
-            photoRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFound("Not found photo with id: " + id));
+            photoRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Not found photo with id: " + id));
         }
 
         return "Read all successful, quantity: " + quantity;
     }
 
-    public String createMultiple(String url, int quantity, String method) {
+    public String createMultipleTime(String url, int quantity, String method) {
         url = url + quantity;
         if (!PHOTOS_RANGE.contains(String.valueOf(quantity)) || !"single,all".contains(method)) {
             throw new BadRequest("Parameter quantity should be one of {" + PHOTOS_RANGE + "} and/or serializeTo one of {string/object}");
         }
 
+        Photo[] photos = fetchAndPrepareData(url);
+        if (method.equals("single")) {
+            return utils.measureTime(photos, this::createMultipleSingle);
+        }
+
+        return utils.measureTime(photos, this::createMultipleAll);
+    }
+
+    private Photo[] fetchAndPrepareData(String url) {
         ResponseEntity<Photo[]> response = restTemplate.getForEntity(url, Photo[].class);
         if (response.getStatusCode().value() != 200) {
             throw new CannotFetchData("Cannot fetch data from " + url);
         }
 
-        if (method.equals("single")) {
-            return utils.measureTime(response.getBody(), this::createMultiple);
+        //TODO Test na pustej tabeli
+        long id;
+        try {
+            id = photoRepository.findMaxId().get() + 1;
+        } catch (Exception e) {
+            id = 1L;
         }
-        else {
-            return utils.measureTime(response.getBody(), this::createMultipleAll);
+        Photo[] photos = response.getBody();
+        for (Photo photo: photos) {
+            photo.setId(id);
+            id++;
         }
+
+        return photos;
     }
 
     private String createMultipleAll(Photo[] photos) {
@@ -79,7 +96,7 @@ public class CRUDTimeService {
         return "Successful saved all objects";
     }
 
-    private String createMultiple(Photo[] photos) {
+    private String createMultipleSingle(Photo[] photos) {
 
         for (Photo photo : photos) {
             photoRepository.save(photo);
@@ -87,39 +104,37 @@ public class CRUDTimeService {
         return "Successful saved all objects";
     }
 
-    public String updateMultipleTime(int quantity, long id) {
-        return utils.measureTime(quantity + "/" + id, this::updateMultiple);
+    public String updateMultipleTime(int quantity) {
+        return utils.measureTime(quantity, this::updateMultiple);
     }
 
-    private String updateMultiple(String params) {
-        int quantity = Integer.parseInt(params.split("/")[0]);
-        long id = Long.parseLong(params.split("/")[1]);
-        for (long i=id; i<quantity+1; i++) {
-            photoRepository.findById(id)
+    private String updateMultiple(int quantity) {
+        long id = photoRepository.findMinId().get();
+        for (long i=id; i<id+quantity; i++) {
+            photoRepository.findById(i)
                     .map(photo -> {
-                        photo.setAlbumId(photoReq.getAlbumId());
-                        photo.setTitle(photoReq.getTitle());
-                        photo.setUrl(photoReq.getUrl());
-                        photo.setThumbnailUrl(photoReq.getThumbnailUrl());
+                        photo.setAlbumId(photoReqMock.getAlbumId());
+                        photo.setTitle(photoReqMock.getTitle());
+                        photo.setUrl(photoReqMock.getUrl());
+                        photo.setThumbnailUrl(photoReqMock.getThumbnailUrl());
                         return photoRepository.save(photo);
-                    }).orElseThrow(() -> new ResourceNotFound("Not found photo with id: " + id));
+                    }).orElseThrow(() -> new ResourceNotFound("Not found photo with given id"));
         }
         return "Successful updated all objects, quantity: " + quantity;
     }
 
-    public String deleteMultipleTime(int quantity, long id) {
-        return utils.measureTime(quantity + "/" + id, this::deleteMultiple);
+    public String deleteMultipleTime(int quantity) {
+        return utils.measureTime(quantity, this::deleteMultiple);
     }
 
-    private String deleteMultiple(String params) {
-        int quantity = Integer.parseInt(params.split("/")[0]);
-        long id = Long.parseLong(params.split("/")[1]);
-        for (long i=id; i<quantity+1; i++) {
-            photoRepository.findById(id)
+    private String deleteMultiple(int quantity) {
+        long id = photoRepository.findMinId().get();
+        for (long i=id; i<id+quantity; i++) {
+            photoRepository.findById(i)
                     .map(photo -> {
                         photoRepository.delete(photo);
                         return ResponseEntity.ok().build();
-                    }).orElseThrow(() -> new ResourceNotFound("Not found photo with id: " + id));
+                    }).orElseThrow(() -> new ResourceNotFound("Not found photo with given id"));
         }
         return "Successful deleted all objects, quantity: " + quantity;
     }

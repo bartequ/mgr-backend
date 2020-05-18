@@ -20,22 +20,22 @@ public class CRUDTimeController {
     }
 
     @GetMapping("/save/{quantity}/{method}")
-    public String saveTablePhotosToDb(@PathVariable Integer quantity, @PathVariable String method) {
-        return crudTimeService.createMultiple(URLHelper.PHOTOS, quantity, method);
+    public String saveMultiplePhotosToDb(@PathVariable Integer quantity, @PathVariable String method) {
+        return crudTimeService.createMultipleTime(URLHelper.PHOTOS, quantity, method);
     }
 
-    @GetMapping("/read/{method}/{quantity}/{id}")
-    public String readMultiplePhotos(@PathVariable String method, @PathVariable Integer quantity, @PathVariable Long id) {
-        return crudTimeService.readMultipleTime(method, quantity, id);
+    @GetMapping("/read/{method}/{quantity}")
+    public String readMultiplePhotos(@PathVariable String method, @PathVariable Integer quantity) {
+        return crudTimeService.readMultipleTime(method, quantity);
     }
 
-    @GetMapping("/update/{quantity}/{startingId}")
-    public String updateMultiplePhotos(@PathVariable Integer quantity, @PathVariable Long startingId) {
-        return crudTimeService.updateMultipleTime(quantity, startingId);
+    @GetMapping("/update/{quantity}")
+    public String updateMultiplePhotos(@PathVariable Integer quantity) {
+        return crudTimeService.updateMultipleTime(quantity);
     }
 
-    @GetMapping("/delete/{quantity}/{startingId}")
-    public String deleteMultiplePhotos(@PathVariable Integer quantity, @PathVariable Long startingId) {
-        return crudTimeService.deleteMultipleTime(quantity, startingId);
+    @GetMapping("/delete/{quantity}")
+    public String deleteMultiplePhotos(@PathVariable Integer quantity) {
+        return crudTimeService.deleteMultipleTime(quantity);
     }
 }
