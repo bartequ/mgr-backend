@@ -19,8 +19,8 @@ public class CRUDTimeController {
         this.crudTimeService = crudTimeService;
     }
 
-    @GetMapping("/save/{quantity}/{method}")
-    public String saveMultiplePhotosToDb(@PathVariable Integer quantity, @PathVariable String method) {
+    @GetMapping("/create/{quantity}/{method}")
+    public String createMultiplePhotosToDb(@PathVariable Integer quantity, @PathVariable String method) {
         return crudTimeService.createMultipleTime(URLHelper.PHOTOS, quantity, method);
     }
 

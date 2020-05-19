@@ -56,12 +56,12 @@ public class CRUDTimeService {
     }
 
     public String createMultipleTime(String url, int quantity, String method) {
-        url = url + quantity;
-        if (!PHOTOS_RANGE.contains(String.valueOf(quantity)) || !"single,all".contains(method)) {
+        url = url + 5000;
+        if (!"single,all".contains(method)) {
             throw new BadRequest("Parameter quantity should be one of {" + PHOTOS_RANGE + "} and/or serializeTo one of {string/object}");
         }
 
-        Photo[] photos = fetchAndPrepareData(url);
+        Photo[] photos = fetchAndPrepareData(url, quantity);
         if (method.equals("single")) {
             return utils.measureTime(photos, this::createMultipleSingle);
         }
@@ -69,13 +69,13 @@ public class CRUDTimeService {
         return utils.measureTime(photos, this::createMultipleAll);
     }
 
-    private Photo[] fetchAndPrepareData(String url) {
+    private Photo[] fetchAndPrepareData(String url, int quantity) {
         ResponseEntity<Photo[]> response = restTemplate.getForEntity(url, Photo[].class);
         if (response.getStatusCode().value() != 200) {
             throw new CannotFetchData("Cannot fetch data from " + url);
         }
         long id;
-        //TODO Test na pustej tabeli
+
         try {
             id = photoRepository.findMaxId().get() + 1;
         } catch (Exception e) {
@@ -87,7 +87,7 @@ public class CRUDTimeService {
             id++;
         }
 
-        return photos;
+        return Arrays.copyOfRange(photos, 0, quantity);
     }
 
     private String createMultipleAll(Photo[] photos) {
